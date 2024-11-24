@@ -3,11 +3,7 @@ export default function Article(title: string, content: string) {
     <div className="max-w-2xl mx-auto p-6  shadow-lg rounded-lg">
       <h1 className="text-3xl font-semibold  mb-4 text-center">{title}</h1>
       <div className="text-lg  leading-relaxed">
-        {content.split("\n").map((paragraph, index) => (
-          <p key={index} className="pl-8 mb-4">
-            {paragraph}
-          </p>
-        ))}
+        <p className="mb-4">{content}</p>
       </div>
     </div>
   );
