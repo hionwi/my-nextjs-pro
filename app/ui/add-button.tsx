@@ -37,11 +37,10 @@ const FloatingButton = () => {
   }, []);
 
   // 提交表单
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     closeModal(); // 提交后关闭弹窗
-    await addData(title, content); // 调用添加数据的函数
-    window.location.reload(); // 提交后刷新页面
+    addData(title, content); // 调用添加数据的函数
   };
 
   return (
