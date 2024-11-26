@@ -59,21 +59,49 @@ export default function Article({
 
   return (
     <div className="max-w-2xl mx-auto p-6 shadow-lg rounded-lg">
-      <h1 className="text-3xl font-semibold mb-4 text-center">{title}</h1>
-      <div className="text-lg leading-relaxed mb-4">
-        <p>{content}</p>
+      <h1 className="text-3xl font-semibold mb-4 text-center text-gray-900 dark:text-white">{title}</h1>
+      <div className="text-lg leading-relaxed mb-4 text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
+        {content.split('\n').map((line, index) => (
+          <p key={index}>
+            {line.split('\t').map((segment, i) => {
+              const urlRegex = /(https?:\/\/[^\s]+)/g;
+              const parts = segment.split(urlRegex);
+              return (
+                <span key={i} style={{ marginLeft: i > 0 ? '2em' : '0' }}>
+                  {parts.map((part, j) => {
+                    if (urlRegex.test(part)) {
+                      if (/\.(jpeg|jpg|gif|png)$/.test(part)) {
+                        return (
+                          <img key={j} src={part} alt="content image" className="my-2" />
+                        );
+                      } else {
+                        return (
+                          <a key={j} href={part} className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">
+                            {part}
+                          </a>
+                        );
+                      }
+                    } else {
+                      return part;
+                    }
+                  })}
+                </span>
+              );
+            })}
+          </p>
+        ))}
       </div>
       {/* 按钮容器，始终居中 */}
-      <div className="flex justify-end space-x-4 mb-4">
+      <div className="flex justify-between items-center mt-4">
         <button
           onClick={openModal}
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800"
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
           修改
         </button>
         <button
           onClick={handleDelete}
-          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 dark:bg-red-700 dark:hover:bg-red-800"
+          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
         >
           删除
         </button>
@@ -84,3 +112,6 @@ export default function Article({
     </div>
   );
 }
+
+
+
