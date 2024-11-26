@@ -2,6 +2,6 @@
 import { db } from "@/server";
 
 export default async function getData() {
-  const posts = (await db.query.postsTable.findMany()).reverse();
+  const posts = (await db.query.postsTable.findMany())
   return posts;
 }
