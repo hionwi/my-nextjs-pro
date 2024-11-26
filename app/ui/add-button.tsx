@@ -5,6 +5,7 @@ import InputC from "./input-c";
 
 const FloatingButton = () => {
   const [isOpen, setIsOpen] = useState(false); // 控制弹窗的显示和隐藏
+  const [isScroll, setisScroll] = useState(false); // 控制弹窗的显示和隐藏
   const [content, setContent] = useState("");
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -37,6 +38,24 @@ const FloatingButton = () => {
     };
   }, []);
 
+
+
+
+
+  useEffect(() => {
+
+    function handleScroll() {
+      setisScroll(!isScroll);
+
+    }
+
+    window.addEventListener('click', handleScroll);
+
+    return () => {
+      window.removeEventListener('click', handleScroll);
+    };
+  }, [isScroll]);
+
   // 提交表单
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -47,18 +66,19 @@ const FloatingButton = () => {
   return (
     <div>
       {/* 浮动按钮 */}
-      <button
-        className="
+      {isScroll && <button
+        className={`
           fixed bottom-5 right-5 w-16 h-16 
           bg-gray-800 text-white text-3xl rounded-full 
           flex items-center justify-center shadow-lg 
           hover:bg-gray-700 
           dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-700
-        "
+          transition-opacity duration-300
+        `}
         onClick={openModal}
       >
         +
-      </button>
+      </button>}
 
       {/* 弹窗 */}
       {isOpen &&

@@ -11,12 +11,12 @@ const geistSans = localFont({
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
-  weight: "100 900",  
+  weight: "100 900",
 });
 
 export const metadata: Metadata = {
-  title: "考公计划",
-  description: "考公计划",
+  title: "tyx的研究生内容",
+  description: "tyx的研究生内容",
 };
 
 export default function RootLayout({
