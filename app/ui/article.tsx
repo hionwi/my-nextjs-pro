@@ -70,17 +70,11 @@ export default function Article({
                 <span key={i} style={{ marginLeft: i > 0 ? '2em' : '0' }}>
                   {parts.map((part, j) => {
                     if (urlRegex.test(part)) {
-                      if (/\.(jpeg|jpg|gif|png)$/.test(part)) {
-                        return (
-                          <img key={j} src={part} alt="content image" className="my-2" />
-                        );
-                      } else {
-                        return (
-                          <a key={j} href={part} className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">
-                            {part}
-                          </a>
-                        );
-                      }
+                      return (
+                        <a key={j} href={part} className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">
+                          {part}
+                        </a>
+                      );
                     } else {
                       return part;
                     }
